@@ -15,7 +15,7 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
             expand();
         }
         boolean result = false;
-        int bucket = indexFor(hash(Objects.hashCode(key)));
+        int bucket = getBucket(key);
         if (table[bucket] == null) {
             table[bucket] = new MapEntry<>(key, value);
             count++;
@@ -23,6 +23,10 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
             result = true;
         }
         return result;
+    }
+
+    private int getBucket(K key) {
+        return indexFor(hash(Objects.hashCode(key)));
     }
 
     private int hash(int hashCode) {
@@ -49,23 +53,26 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
     @Override
     public V get(K key) {
         V result = null;
-        int bucket = indexFor(hash(Objects.hashCode(key)));
+        int bucket = getBucket(key);
         if (table[bucket] != null) {
-            if (Objects.hashCode(table[bucket].key) == Objects.hashCode(key)
-                    && Objects.equals(table[bucket].key, key)) {
+            if (isHashCodeAndEqualsKey(key, bucket)) {
                 result = table[bucket].value;
             }
         }
         return result;
     }
 
+    private boolean isHashCodeAndEqualsKey(K key, int bucket) {
+        return Objects.hashCode(table[bucket].key) == Objects.hashCode(key)
+                && Objects.equals(table[bucket].key, key);
+    }
+
     @Override
     public boolean remove(K key) {
         boolean result = false;
-        int bucket = indexFor(hash(Objects.hashCode(key)));
+        int bucket = getBucket(key);
         if (table[bucket] != null) {
-            if (Objects.hashCode(table[bucket].key) == Objects.hashCode(key)
-                    && Objects.equals(table[bucket].key, key)) {
+            if (isHashCodeAndEqualsKey(key, bucket)) {
                 table[bucket] = null;
                 result = true;
                 count--;
