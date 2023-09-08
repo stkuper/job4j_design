@@ -14,13 +14,14 @@ public class Analize {
             users.put(prev.getId(), prev);
         }
         for (User curr : current) {
-            if (!users.containsKey(curr.getId())) {
+            int currId = curr.getId();
+            if (!users.containsKey(currId)) {
                 added++;
             }
-            if (users.containsKey(curr.getId()) && !users.containsValue(curr)) {
+            if (users.containsKey(currId) && !users.containsValue(curr)) {
                 changed++;
             }
-            users.remove(curr.getId());
+            users.remove(currId);
         }
         removed = users.size();
         return new Info(added, changed, removed);
