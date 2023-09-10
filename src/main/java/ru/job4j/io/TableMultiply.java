@@ -1,6 +1,7 @@
 package ru.job4j.io;
 
 import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class TableMultiply {
     public static void main(String[] args) {
@@ -21,7 +22,7 @@ public class TableMultiply {
             fos.write(System.lineSeparator().getBytes());
             fos.write("1 * 9 = 9".getBytes());
             fos.write(System.lineSeparator().getBytes());
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
