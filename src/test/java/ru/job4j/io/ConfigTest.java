@@ -30,6 +30,14 @@ class ConfigTest {
     }
 
     @Test
+    void whenFileWithoutPair() {
+        String path = "./data/pair_without_comment.properties";
+        Config config = new Config(path);
+        config.load();
+        assertThat(config.value("names")).isNull();
+    }
+
+    @Test
     void whenFileWithCommentsAndNullLines() {
         String path = "./data/file_with_comments_and_without_lines.properties";
         Config config = new Config(path);
@@ -65,5 +73,16 @@ class ConfigTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageMatching("^.+")
                 .hasMessageContaining("Key or value is empty");
+    }
+
+    @Test
+    void whenFileWithoutSignAnyway() {
+        String path = "./data/app_without_sign_anyway.properties";
+        Config config = new Config(path);
+        assertThatThrownBy(config::load)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageMatching("^.+")
+                .hasMessageContaining("Line without sign anyway");
+
     }
 }

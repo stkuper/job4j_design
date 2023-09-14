@@ -10,7 +10,7 @@ import java.util.StringJoiner;
 public class Config {
 
     private final String path;
-    private final Map<String, String> values = new HashMap<String, String>();
+    private final Map<String, String> values = new HashMap<>();
 
     public Config(final String path) {
         this.path = path;
@@ -22,8 +22,11 @@ public class Config {
                 new FileReader(this.path))) {
             while ((str = reader.readLine()) != null) {
                 if (!str.isBlank() && !str.startsWith("#")) {
+                    if (!str.contains("=")) {
+                        throw new IllegalArgumentException("Line without sign anyway");
+                    }
                     String[] lines = str.split("=", 2);
-                    if (lines[0].isEmpty() || lines[1].isEmpty()) {
+                    if (lines.length == 2 && (lines[0].isBlank() || lines[1].isBlank())) {
                         throw new IllegalArgumentException("Key or value is empty");
                     }
                     values.put(lines[0], lines[1]);
