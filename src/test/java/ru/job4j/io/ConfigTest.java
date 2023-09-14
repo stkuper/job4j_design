@@ -52,7 +52,8 @@ class ConfigTest {
         assertThatThrownBy(config::load)
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageMatching("^.+")
-                .hasMessageContaining("Key or value is empty");
+                .hasMessageContaining("Key or value at line"
+                        + " :hibernate.connection.username= is empty");
     }
 
     @Test
@@ -62,7 +63,7 @@ class ConfigTest {
         assertThatThrownBy(config::load)
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageMatching("^.+")
-                .hasMessageContaining("Key or value is empty");
+                .hasMessageContaining("Key or value at line :=password is empty");
     }
 
     @Test
@@ -72,7 +73,7 @@ class ConfigTest {
         assertThatThrownBy(config::load)
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageMatching("^.+")
-                .hasMessageContaining("Key or value is empty");
+                .hasMessageContaining("Key or value at line :                = is empty");
     }
 
     @Test
@@ -82,7 +83,8 @@ class ConfigTest {
         assertThatThrownBy(config::load)
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageMatching("^.+")
-                .hasMessageContaining("Line without sign anyway");
+                .hasMessageContaining("Line :nameStas KupriyanovKupriyanov Stas"
+                        + " without the symbol '='");
 
     }
 }

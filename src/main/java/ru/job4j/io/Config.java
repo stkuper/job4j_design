@@ -23,11 +23,11 @@ public class Config {
             while ((str = reader.readLine()) != null) {
                 if (!str.isBlank() && !str.startsWith("#")) {
                     if (!str.contains("=")) {
-                        throw new IllegalArgumentException("Line without sign anyway");
+                        throw new IllegalArgumentException("Line :%s without the symbol '='".formatted(str));
                     }
                     String[] lines = str.split("=", 2);
                     if (lines.length == 2 && (lines[0].isBlank() || lines[1].isBlank())) {
-                        throw new IllegalArgumentException("Key or value is empty");
+                        throw new IllegalArgumentException("Key or value at line :%s is empty".formatted(str));
                     }
                     values.put(lines[0], lines[1]);
                 }
