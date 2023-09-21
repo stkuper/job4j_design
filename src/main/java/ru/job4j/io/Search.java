@@ -6,6 +6,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Search {
     public static void main(String[] args) {
@@ -31,7 +33,10 @@ public class Search {
                 throw new IllegalArgumentException(String.format(
                         "Root folder %s is incorrect. Usage correct ROOT_FOLDER.", array[0]));
             }
-            if (!array[1].contains(".")) {
+            Pattern pattern = Pattern.compile("^\\.\\S+");
+            String text = array[1];
+            Matcher matcher = pattern.matcher(text);
+            if (!matcher.find()) {
                 throw new IllegalArgumentException(String.format(
                         "File extension %s incorrect. Usage correct FILE-EXTENSION", array[1]));
             }
