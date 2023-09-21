@@ -12,19 +12,13 @@ import java.util.List;
 import java.util.Map;
 
 public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
-    Map<FileProperty, List<Path>> filePropertyListMap = new HashMap<>();
+    private Map<FileProperty, List<Path>> filePropertyListMap = new HashMap<>();
 
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-        if (Files.isRegularFile(file)) {
-            FileProperty fileProperty = new FileProperty(Files.size(file),
-                    file.getFileName().toString());
-            if (filePropertyListMap.containsKey(fileProperty)) {
-                filePropertyListMap.get(fileProperty).add(file);
-            }
-            filePropertyListMap.putIfAbsent(fileProperty,
-                    new ArrayList<>(List.of(file)));
-        }
+        FileProperty fileProperty = new FileProperty(Files.size(file),
+                file.getFileName().toString());
+        filePropertyListMap.computeIfAbsent(fileProperty, k -> new ArrayList<>()).add(file);
         return super.visitFile(file, attrs);
     }
 
@@ -36,6 +30,7 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
                 for (Path path : filePropertyListMap.get(fileProperty)) {
                     System.out.println(path.toAbsolutePath());
                 }
+                System.out.println();
             }
         }
     }
