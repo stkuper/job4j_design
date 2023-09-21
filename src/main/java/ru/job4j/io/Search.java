@@ -26,12 +26,18 @@ public class Search {
     }
 
     public static void validateArguments(String[] array) {
-        if (array.length == 0) {
+        if (array.length == 2) {
+            if (!Files.exists(Path.of(array[0]))) {
+                throw new IllegalArgumentException(String.format(
+                        "Root folder %s is incorrect. Usage correct ROOT_FOLDER.", array[0]));
+            }
+            if (!array[1].contains(".")) {
+                throw new IllegalArgumentException(String.format(
+                        "File extension %s incorrect. Usage correct FILE-EXTENSION", array[1]));
+            }
+        } else {
             throw new IllegalArgumentException(
-                    "Root folder and file extension is null. Usage Root_Folder.");
-        }
-        if (array.length < 2) {
-            throw new IllegalArgumentException("Arguments less 2. Check send arguments.");
+                    "Arguments are not equal to 2. Check send arguments.");
         }
     }
 }
