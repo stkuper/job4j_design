@@ -2,8 +2,7 @@ package ru.job4j.io;
 
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 class ArgsNameTest {
 
@@ -46,7 +45,9 @@ class ArgsNameTest {
         assertThatThrownBy(() -> ArgsName.of(new String[]{"-Xmx=512", "-=?msg=Exit="}))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageMatching("^.+")
-                .hasMessageContaining("Error: This argument '-=?msg=Exit=' does not contain a key");
+                .hasMessageContaining(
+                        "Error: This argument '-=?msg=Exit=' does not contain a key"
+                );
     }
 
     @Test
@@ -54,7 +55,9 @@ class ArgsNameTest {
         assertThatThrownBy(() -> ArgsName.of(new String[]{"-Xmx=512", "-=?msg=Hello="}))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageMatching("^.+")
-                .hasMessageContaining("Error: This argument '-=?msg=Hello=' does not contain a key");
+                .hasMessageContaining(
+                        "Error: This argument '-=?msg=Hello=' does not contain a key"
+                );
     }
 
     @Test
@@ -62,7 +65,9 @@ class ArgsNameTest {
         assertThatThrownBy(() -> ArgsName.of(new String[]{"-Xmx=512", "-request="}))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageMatching("^.+")
-                .hasMessageContaining("Error: This argument '-request=' does not contain a value");
+                .hasMessageContaining(
+                        "Error: This argument '-request=' does not contain a value"
+                );
     }
 
     @Test
@@ -70,7 +75,9 @@ class ArgsNameTest {
         assertThatThrownBy(() -> ArgsName.of(new String[]{"-Xmx=512", "-encoding="}))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageMatching("^.+")
-                .hasMessageContaining("Error: This argument '-encoding=' does not contain a value");
+                .hasMessageContaining(
+                        "Error: This argument '-encoding=' does not contain a value"
+                );
     }
 
     @Test
@@ -78,7 +85,9 @@ class ArgsNameTest {
         assertThatThrownBy(() -> ArgsName.of(new String[]{"-Xmx=512", "-request?msgHello"}))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageMatching("^.+")
-                .hasMessageContaining("Error: This argument '-request?msgHello' does not contain an equal sign");
+                .hasMessageContaining(
+                        "Error: This argument '-request?msgHello' does not contain an equal sign"
+                );
     }
 
     @Test
@@ -86,6 +95,9 @@ class ArgsNameTest {
         assertThatThrownBy(() -> ArgsName.of(new String[]{"-Xmx=512", "request=?msg=Exit="}))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageMatching("^.+")
-                .hasMessageContaining("Error: This argument 'request=?msg=Exit=' does not start with a '-' character");
+                .hasMessageContaining(
+                        "Error: This argument 'request=?msg=Exit='"
+                                + " does not start with a '-' character"
+                );
     }
 }

@@ -36,16 +36,24 @@ public class ArgsName {
                 continue;
             }
             if (!line.contains("=")) {
-                throw new IllegalArgumentException(String.format("Error: This argument '%s' does not contain an equal sign", line));
+                throw new IllegalArgumentException(String.format(
+                        "Error: This argument '%s' does not contain an equal sign", line
+                ));
             }
             if (!line.startsWith("-")) {
-                throw new IllegalArgumentException(String.format("Error: This argument '%s' does not start with a '-' character", line));
+                throw new IllegalArgumentException(String.format(
+                        "Error: This argument '%s' does not start with a '-' character", line
+                ));
             }
             if (line.matches("-=.+")) {
-                throw new IllegalArgumentException(String.format("Error: This argument '%s' does not contain a key", line));
+                throw new IllegalArgumentException(String.format(
+                        "Error: This argument '%s' does not contain a key", line
+                ));
             }
             if (line.matches("-\\w+=")) {
-                throw new IllegalArgumentException(String.format("Error: This argument '%s' does not contain a value", line));
+                throw new IllegalArgumentException(String.format(
+                        "Error: This argument '%s' does not contain a value", line
+                ));
             }
         }
     }
@@ -53,7 +61,9 @@ public class ArgsName {
     public void validateKey(String key) {
         Set<String> keys = values.keySet();
         if (!keys.contains(key)) {
-            throw new IllegalArgumentException(String.format("This key: '%s' is missing", key));
+            throw new IllegalArgumentException(String.format(
+                    "This key: '%s' is missing", key
+            ));
         }
     }
 
