@@ -53,8 +53,8 @@ public class ConsoleChat {
                 new FileReader(botAnswers, StandardCharsets.UTF_8))) {
             listPhrases = bufferedReader.lines()
                     .collect(Collectors.toList());
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException exception) {
+            exception.printStackTrace();
         }
         return listPhrases;
     }
