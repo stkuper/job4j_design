@@ -17,6 +17,26 @@ public class Ship {
         this.statuses = statuses;
     }
 
+    public boolean isCommercial() {
+        return commercial;
+    }
+
+    public int getCargo() {
+        return cargo;
+    }
+
+    public String getNameShip() {
+        return nameShip;
+    }
+
+    public Engine getEngine() {
+        return engine;
+    }
+
+    public String[] getStatuses() {
+        return statuses;
+    }
+
     @Override
     public String toString() {
         return "Ship{"
