@@ -1,13 +1,13 @@
 create table users(
 id serial primary key,
 first_name varchar(100),
-last_name varchar(100)
+last_name varchar(100),
+roles_id int references roles(id)
 );
 
 create table roles(
 id serial primary key,
-role_name varchar(100),
-users_id int references users(id)
+role_name varchar(100)
 );
 
 create table rules(
@@ -18,7 +18,9 @@ rule_name varchar(100)
 create table items(
 id serial primary key,
 item_name varchar(100),
-users_id int references users(id)
+users_id int references users(id),
+categories_id int references categories(id),
+states_id int references states(id)
 );
 
 create table comments(
@@ -35,14 +37,12 @@ items_id int references items(id)
 
 create table states(
 id serial primary key,
-state_name varchar(100),
-items_id int references items(id)
+state_name varchar(100)
 );
 
 create table categories(
 id serial primary key,
-categori_name varchar(100),
-items_id int references items(id)
+categori_name varchar(100)
 );
 
 create table roles_rules(

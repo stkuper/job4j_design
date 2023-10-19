@@ -1,24 +1,23 @@
-insert into users(id, first_name, last_name)
+insert into users(id, first_name, last_name, roles_id)
 values
-(1, 'Stas', 'Kupriyanov'),
-(2, 'Ivan', 'Petrov');
+(1, 'Stas', 'Kupriyanov', 2),
+(2, 'Ivan', 'Petrov', 1);
 
-insert into roles(id, role_name, users_id)
+insert into roles(id, role_name)
 values
-(1, 'java_intern', 1),
-(2, 'java_intern', 2),
-(3, 'java_junior', 1);
+(1, 'java_intern'),
+(2, 'java_junior');
 
 insert into rules(id, rule_name)
 values
 (1, 'absent'),
 (2, 'present');
 
-insert into items(id, item_name, users_id)
+insert into items(id, item_name, users_id, categories_id, states_id)
 values
-(1, 'middle_task', 1),
-(2, 'light_task', 1),
-(3, 'light_task', 2);
+(1, 'middle_task', 1, 1, 1),
+(2, 'light_task', 1, 3, 2),
+(3, 'light_task', 2, 2, 1);
 
 insert into comments(id, comment_name, items_id)
 values
@@ -33,17 +32,16 @@ values
 (3, 'file3', 2),
 (4, 'file3', 3);
 
-insert into states(id, state_name, items_id)
+insert into states(id, state_name)
 values
-(1, 'in work', 1),
-(2, 'no work', 2),
-(3, 'in work', 3);
+(1, 'in work'),
+(2, 'no work'),
 
-insert into categories(id, categori_name, items_id)
+insert into categories(id, categori_name)
 values
-(1, 'finance', 1),
-(2, 'query', 2),
-(3, 'bot', 3);
+(1, 'finance'),
+(2, 'query'),
+(3, 'bot');
 
 insert into roles_rules(id, roles_id, rules_id)
 values
