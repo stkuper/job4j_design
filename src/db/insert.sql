@@ -16,7 +16,7 @@ values
 insert into states(id, state_name)
 values
 (1, 'in work'),
-(2, 'no work'),
+(2, 'no work');
 
 insert into categories(id, categori_name)
 values
