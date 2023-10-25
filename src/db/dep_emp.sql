@@ -47,20 +47,20 @@ left join employees e on e.departments_id = d.id;
 select eName, dName from employees e
 right join departments d on d.id = e.departments_id;
 
-create table teens(
+create table teen(
 id serial primary key,
 tName varchar(10),
-gender varchar(10),
-gender_id int references teens(id)
+gender varchar(10)
 );
 
-insert into teens(tName, gender, gender_id) values
-('Aaa', 'asd', 1),
-('Bbb', 'bvc', 2),
-('CCC', 'cqs', 3),
-('VvvV', 'vcx', 4),
-('NNsn', 'nmd', 5),
-('Mmmdads', 'mmm', 6);
+insert into teen(tName, gender) values
+('Анна', 'Ж'),
+('Света', 'Ж'),
+('Юля', 'Ж'),
+('Саня', 'М'),
+('Юра', 'М'),
+('Вова', 'М');
 
-select * from teens t
-cross join teens g;
+select * from teen t
+cross join teen g
+where t.gender = 'М' and g.gender = 'Ж';
