@@ -29,8 +29,7 @@ CREATE trigger tax_after_st
 
 CREATE OR REPLACE function row_tax() returns trigger as $$
 BEGIN
-    update products2
-    set price = price + price * 0.2;
+    new.price = new.price + new.price * 0.2;
     return new;
 END;
 $$ LANGUAGE plpgsql;
