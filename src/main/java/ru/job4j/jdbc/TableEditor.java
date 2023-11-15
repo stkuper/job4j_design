@@ -28,67 +28,63 @@ public class TableEditor implements AutoCloseable {
     }
 
     public void createTable(String tableName) throws Exception {
-        try (Statement statement = connection.createStatement()) {
-            String sql = String.format(
-                    "CREATE TABLE IF NOT EXISTS %s(%s, %s);",
-                    tableName,
-                    "id SERIAL PRIMARY KEY",
-                    "name TEXT"
-            );
-            statement.execute(sql);
-            System.out.println(getTableScheme(tableName));
-        }
+        String sql = String.format(
+                "CREATE TABLE IF NOT EXISTS %s(%s, %s);",
+                tableName,
+                "id SERIAL PRIMARY KEY",
+                "name TEXT"
+        );
+        statementSql(sql);
+        System.out.println(getTableScheme(tableName));
     }
 
     public void dropTable(String tableName) throws Exception {
-        try (Statement statement = connection.createStatement()) {
-            String sql = String.format(
-                    "DROP TABLE IF EXISTS %s;",
-                    tableName
-            );
-            statement.execute(sql);
-        }
+        String sql = String.format(
+                "DROP TABLE IF EXISTS %s;",
+                tableName
+        );
+        statementSql(sql);
     }
 
     public void addColumn(String tableName, String columnName, String type) throws Exception {
-        try (Statement statement = connection.createStatement()) {
-            String sql = String.format(
-                    "ALTER TABLE IF EXISTS %s "
-                            + "ADD COLUMN %s %s;",
-                    tableName,
-                    columnName,
-                    type
-            );
-            statement.execute(sql);
-            System.out.println(getTableScheme(tableName));
-        }
+        String sql = String.format(
+                "ALTER TABLE IF EXISTS %s "
+                        + "ADD COLUMN %s %s;",
+                tableName,
+                columnName,
+                type
+        );
+        statementSql(sql);
+        System.out.println(getTableScheme(tableName));
     }
 
     public void dropColumn(String tableName, String columnName) throws Exception {
-        try (Statement statement = connection.createStatement()) {
-            String sql = String.format(
-                    "ALTER TABLE IF EXISTS %s "
-                            + "DROP COLUMN %s;",
-                    tableName,
-                    columnName
-            );
-            statement.execute(sql);
-            System.out.println(getTableScheme(tableName));
-        }
+        String sql = String.format(
+                "ALTER TABLE IF EXISTS %s "
+                        + "DROP COLUMN %s;",
+                tableName,
+                columnName
+        );
+        statementSql(sql);
+        System.out.println(getTableScheme(tableName));
     }
 
     public void renameColumn(String tableName, String columnName, String newColumnName)
             throws Exception {
+        String sql = String.format(
+                "ALTER TABLE IF EXISTS %s "
+                        + "RENAME COLUMN %s TO %s;",
+                tableName,
+                columnName,
+                newColumnName
+        );
+        statementSql(sql);
+        System.out.println(getTableScheme(tableName));
+    }
+
+    private void statementSql(String sql) throws SQLException {
         try (Statement statement = connection.createStatement()) {
-            String sql = String.format(
-                    "ALTER TABLE IF EXISTS %s "
-                            + "RENAME COLUMN %s TO %s;",
-                    tableName,
-                    columnName,
-                    newColumnName
-            );
             statement.execute(sql);
-            System.out.println(getTableScheme(tableName));
         }
     }
 
