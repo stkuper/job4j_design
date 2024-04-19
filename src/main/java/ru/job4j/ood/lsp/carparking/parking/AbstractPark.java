@@ -7,17 +7,10 @@ import java.util.List;
 
 public class AbstractPark implements Park {
     private List<Vehicle> vehicleList = new ArrayList<>();
-    private int carSize;
-    private int truckSize;
-
-    public AbstractPark(int carSize, int truckSize) {
-        this.carSize = carSize;
-        this.truckSize = truckSize;
-    }
 
     @Override
     public boolean arrive(Vehicle vehicle) {
-        return false;
+        return vehicleList.add(vehicle);
     }
 
     @Override

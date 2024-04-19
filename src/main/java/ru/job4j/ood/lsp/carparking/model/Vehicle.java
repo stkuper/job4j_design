@@ -1,20 +1,20 @@
 package ru.job4j.ood.lsp.carparking.model;
 
-public class Vehicle {
-    private String name;
-    private int size;
+public abstract class Vehicle {
+    protected String number;
+    protected int size;
 
-    public Vehicle(String name, int size) {
-        this.name = name;
-        this.size = size;
+//    public Vehicle(String number, int size) {
+//        this.number = number;
+//        this.size = size;
+//    }
+
+    public String getNumber() {
+        return number;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setNumber(String number) {
+        this.number = number;
     }
 
     public int getSize() {
@@ -28,7 +28,7 @@ public class Vehicle {
     @Override
     public String toString() {
         return "Vehicle{"
-               + "name='" + name + '\''
+               + "name='" + number + '\''
                + ", size=" + size
                + '}';
     }
