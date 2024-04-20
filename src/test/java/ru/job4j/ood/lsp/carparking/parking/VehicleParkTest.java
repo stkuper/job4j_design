@@ -79,4 +79,15 @@ class VehicleParkTest {
         assertThat(park.howFreeCarSpace()).isEqualTo(1);
         assertThat(park.howFreeTruckSpace()).isEqualTo(1);
     }
+
+    @Test
+    void whenLeave1TruckWithCarSpaceThenTrue() {
+        Vehicle truck = new Truck("m123zx", 2);
+        VehiclePark park = new VehiclePark(5, 0);
+        assertThat(park.arrive(truck)).isTrue();
+        assertThat(park.leave(truck)).isTrue();
+        assertThat(park.findAll().size()).isEqualTo(0);
+        assertThat(park.howFreeCarSpace()).isEqualTo(5);
+        assertThat(park.howFreeTruckSpace()).isEqualTo(0);
+    }
 }

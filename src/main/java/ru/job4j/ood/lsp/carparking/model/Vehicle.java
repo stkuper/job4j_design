@@ -4,11 +4,6 @@ public abstract class Vehicle {
     protected String number;
     protected int size;
 
-//    public Vehicle(String number, int size) {
-//        this.number = number;
-//        this.size = size;
-//    }
-
     public String getNumber() {
         return number;
     }
