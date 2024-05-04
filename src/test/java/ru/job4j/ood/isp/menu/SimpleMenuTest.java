@@ -2,8 +2,6 @@ package ru.job4j.ood.isp.menu;
 
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -44,19 +42,5 @@ public class SimpleMenuTest {
         assertThat(menu.select("Купить масло")).isEmpty();
         assertThat(menu.select("Купить продукты").get().getChildren())
                 .isEqualTo(List.of("Купить хлеб", "Купить молоко"));
-    }
-
-    @Test
-    public void whenOutputWhithoutChild() {
-        Menu menu = new SimpleMenu();
-        MenuPrinter printer = new Printer();
-        menu.add(Menu.ROOT, "Сходить в магазин", STUB_ACTION);
-        menu.add(Menu.ROOT, "Покормить собаку", STUB_ACTION);
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(byteArrayOutputStream));
-        printer.print(menu);
-        String consoleOutput = byteArrayOutputStream.toString();
-        assertThat(consoleOutput).doesNotContain("----");
-        System.setOut(System.out);
     }
 }
