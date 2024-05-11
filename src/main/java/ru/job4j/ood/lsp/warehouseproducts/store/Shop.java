@@ -9,8 +9,7 @@ public class Shop extends AbstractStore {
     @Override
     public boolean check(Food food) {
         boolean result = false;
-        int foodLifeLivedPercent =
-                control.calculateRemainDayLife(food.getCreateDate(), food.getExpiryDate());
+        double foodLifeLivedPercent = food.getProductLife();
         if (foodLifeLivedPercent >= SHOP_START_DISCOUNT_PERCENT
             && foodLifeLivedPercent < TRASH_START_PERCENT) {
             food.setDiscount(DISCOUNT);

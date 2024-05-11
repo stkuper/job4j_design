@@ -8,7 +8,6 @@ public class Trash extends AbstractStore {
 
     @Override
     public boolean check(Food food) {
-        return control.calculateRemainDayLife(
-                food.getCreateDate(), food.getExpiryDate()) >= TRASH_START_PERCENT;
+        return food.getProductLife() >= TRASH_START_PERCENT;
     }
 }

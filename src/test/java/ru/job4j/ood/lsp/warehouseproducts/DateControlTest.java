@@ -1,46 +1,60 @@
 package ru.job4j.ood.lsp.warehouseproducts;
 
 import org.junit.jupiter.api.Test;
+import ru.job4j.ood.lsp.warehouseproducts.food.Egg;
+import ru.job4j.ood.lsp.warehouseproducts.food.Food;
 
 import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.withPrecision;
 
 class DateControlTest {
     private DateControl dateControl = new DateControl();
+    private LocalDate today = LocalDate.now();
 
     @Test
     void whenTodayIsCreateDayThen0Percent() {
-        LocalDate create = LocalDate.now();
-        LocalDate expire = create.plusDays(5);
-        assertThat(dateControl.calculateRemainDayLife(create, expire)).isEqualTo(0);
+        LocalDate create = today;
+        LocalDate expire = today.plusDays(5);
+        Food egg = new Egg("Egg", expire, create, 120);
+        dateControl.calculateRemainDayLife(egg, today);
+        assertThat(egg.getProductLife()).isEqualTo(0d, withPrecision(0.01d));
     }
 
     @Test
     void whenTodayisExpireDayThen100Percent() {
-        LocalDate expire = LocalDate.now();
-        LocalDate create = expire.minusDays(7);
-        assertThat(dateControl.calculateRemainDayLife(create, expire)).isEqualTo(100);
+        LocalDate expire = today;
+        LocalDate create = today.minusDays(7);
+        Food egg = new Egg("Egg", expire, create, 120);
+        dateControl.calculateRemainDayLife(egg, today);
+        assertThat(egg.getProductLife()).isEqualTo(100d, withPrecision(0.01d));
     }
 
     @Test
     void whenFoodLifeMore0AndLess25Percent() {
-        LocalDate create = LocalDate.now().minusDays(1);
-        LocalDate expire = LocalDate.now().plusDays(5);
-        assertThat(dateControl.calculateRemainDayLife(create, expire)).isEqualTo(17);
+        LocalDate create = today.minusDays(1);
+        LocalDate expire = today.plusDays(5);
+        Food egg = new Egg("Egg", expire, create, 120);
+        dateControl.calculateRemainDayLife(egg, today);
+        assertThat(egg.getProductLife()).isEqualTo(16.66d, withPrecision(0.01d));
     }
 
     @Test
     void whenFoodLifeMore25AndLess75Percent() {
-        LocalDate create = LocalDate.now().minusDays(5);
-        LocalDate expire = LocalDate.now().plusDays(5);
-        assertThat(dateControl.calculateRemainDayLife(create, expire)).isEqualTo(50);
+        LocalDate create = today.minusDays(5);
+        LocalDate expire = today.plusDays(5);
+        Food egg = new Egg("Egg", expire, create, 120);
+        dateControl.calculateRemainDayLife(egg, today);
+        assertThat(egg.getProductLife()).isEqualTo(50d, withPrecision(0.01d));
     }
 
     @Test
     void whenFoodLifeMore75AndLess100Percent() {
-        LocalDate create = LocalDate.now().minusDays(5);
-        LocalDate expire = LocalDate.now().plusDays(2);
-        assertThat(dateControl.calculateRemainDayLife(create, expire)).isEqualTo(71);
+        LocalDate create = today.minusDays(5);
+        LocalDate expire = today.plusDays(2);
+        Food egg = new Egg("Egg", expire, create, 120);
+        dateControl.calculateRemainDayLife(egg, today);
+        assertThat(egg.getProductLife()).isEqualTo(71.42, withPrecision(0.01d));
     }
 }

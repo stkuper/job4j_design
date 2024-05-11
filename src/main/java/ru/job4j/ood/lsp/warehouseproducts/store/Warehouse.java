@@ -8,7 +8,6 @@ public class Warehouse extends AbstractStore {
 
     @Override
     public boolean check(Food food) {
-        return control.calculateRemainDayLife(
-                food.getCreateDate(), food.getExpiryDate()) <= WAREHOUSE_END_PERCENT;
+        return food.getProductLife() <= WAREHOUSE_END_PERCENT;
     }
 }
