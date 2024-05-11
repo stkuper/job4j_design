@@ -42,6 +42,7 @@ public abstract class Food {
     }
 
     public double getPrice() {
+        System.out.println(price);
         return price;
     }
 
